@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Capstone
 {
-    class Item
+    public abstract class Item
     {
         public string Identifier { get; set; }
 
@@ -14,17 +14,18 @@ namespace Capstone
 
         public string Type { get; set; }
 
-        public Item(string identifier, string name, double price, string type)
+        public int Stock { get; set; } = 5;
+
+        public Item(string identifier, string name, double price, string type, int stock)
         {
             Identifier = identifier;
             Name = name;
             Price = price;
             Type = type;
-
-
+            Stock = stock;
         }
 
-
+        public abstract string Message();
 
     }
 }

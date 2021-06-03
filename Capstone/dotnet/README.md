@@ -108,22 +108,22 @@ The output sales report file is also pipe-delimited for consistency. Each line i
 **Example Output**
 
 >```
->Potato Crisps|10
->Stackers|3
->Grain Waves|0
->Cloud Popcorn|50
->Moonpie|23
->Cowtales|2
->Wonka Bar|1
->Crunchie|3
->Skor|4
->Cola|8
->Dr. Salt|9
->Mountain Melter|12
->Heavy|11
->Diet Cola|6
->U-Chews|4
->Little League Chew|2
->Chiclets|0
->Triplemint|0
->```
+Potato Crisps|0
+Stackers|1
+Grain Waves|0
+Cloud Popcorn|0
+Moonpie|3
+Cowtales|0
+Wonka Bar|0
+Crunchie|0
+Cola|2
+Dr. Salt|0
+Mountain Melter|0
+Heavy|0
+U-Chews|0
+Little League Chew|1
+Chiclets|1
+Triplemint|0
+
+**TOTAL SALES** $11.05
+

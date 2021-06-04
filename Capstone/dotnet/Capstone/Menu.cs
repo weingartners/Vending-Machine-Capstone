@@ -24,12 +24,12 @@ namespace Capstone
 
             Console.WriteLine($"1) Display Vending Machine Items \n2) Purchase \n3) Exit");
 
-    
         }
 
-        public void MenuOption1(Dictionary<string, Item> dictionary)
+        public Dictionary<string, Item> MenuOption1(Dictionary<string, Item> dictionary)
         {
-            
+            Console.Clear();
+
             foreach (KeyValuePair<string, Item> item in dictionary)
             {
                 if (item.Value.Stock <= 0)
@@ -41,13 +41,19 @@ namespace Capstone
                     Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
                 }
             }
+            Console.WriteLine();
+            Console.WriteLine("ENTER to continue...");
+            Console.ReadLine();
+            Console.Clear();
 
+            return dictionary;
         }
 
         public void MenuOption2()
         {
+            Console.Clear();
 
-            Console.WriteLine($"1) Add Money \n2) Select Your Desired Product \n3) Finish Transaction");
+            Console.WriteLine($"1) Feed Money \n2) Select Your Desired Product \n3) Finish Transaction");
 
         }
         public void MenuOption3()
@@ -56,15 +62,16 @@ namespace Capstone
             Console.WriteLine("Thank you for shopping with us.");
         }
 
-        public void SubMenuOption1(decimal userMoney)
+        public decimal SubMenuOption1(decimal userMoney)
         {
+            Console.Clear();
 
             Console.WriteLine("Please Enter A Desired Whole Dollar Amount of Money");
 
-            
+            return userMoney;
         }
 
-        public void SubMenuOption2(Dictionary<string, Item> dictionary)
+        public Dictionary<string,Item> SubMenuOption2(Dictionary<string, Item> dictionary)
         {
             Console.Clear();
 
@@ -79,14 +86,15 @@ namespace Capstone
                     Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
                 }
             }
-
-            
+            return dictionary;          
         }
 
-        public void SubMenuOption3(decimal userMoney)
+        public decimal SubMenuOption3(decimal userMoney)
         {
             Console.Clear();
             Console.WriteLine($"Your change is ${userMoney}, have a wonderful day!");
+
+            return userMoney;
         }
     }
 }

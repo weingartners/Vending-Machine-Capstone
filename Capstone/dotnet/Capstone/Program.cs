@@ -10,6 +10,7 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
+            AuditLog auditLog = new AuditLog();
 
             Menu mainMenu = new Menu("1", "2", "3");
 
@@ -30,13 +31,13 @@ namespace Capstone
 
                 if (keepMenuOpen == "2")
                 {
-                    mainMenu.MenuOption2(); // method with while loop
-                    string userInput = Console.ReadLine();
+                         // method with while loop
+                    string userInput = "";
                     
 
                     while (userInput != "3")
                     {
-                        Console.WriteLine($"1) Add Money \n2) Select Your Desired Product \n3) Finish Transaction");
+                        mainMenu.MenuOption2();
                         userInput = Console.ReadLine();
 
                         if (userInput == "1")
@@ -53,18 +54,19 @@ namespace Capstone
                         {
                             mainMenu.SubMenuOption3(vendingMachine.Balance);
                             vendingMachine.DispenseChange(vendingMachine.Balance);
+                            auditLog.WriteToAuditFile(vendingMachine.auditLog.Transactions);
                         }
                         else
                         {
                             Console.WriteLine("Please enter a valid entry");
                         }
                     }
-
                 }
-                
-            }
-            
-
+                if (keepMenuOpen == "4")
+                {
+                    auditLog.WriteToSalesLog(vendingMachine.auditLog.PurchaseHistory);
+                }
+            }            
         }
     }
 }

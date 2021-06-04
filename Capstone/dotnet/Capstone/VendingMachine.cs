@@ -4,26 +4,26 @@ using System.Text;
 
 namespace Capstone
 {
-    class VendingMachine
+    public class VendingMachine
     {
         public decimal Balance { get; set; }
 
-       
-
         public Dictionary<string, Item> Inventory { get; private set; }
+
+        public AuditLog auditLog { get; set; }
 
         public VendingMachine()
         {
+            auditLog = new AuditLog();
             ReadToArray readToArray = new ReadToArray();
             Inventory = readToArray.LoadInventory();
         }
 
-        public void DispenseChange(decimal balance)
+        public decimal DispenseChange(decimal balance)
         {
             int quarters = 0;
             int dimes = 0;
             int nickles = 0;
-
 
             while (balance > 0)
             {
@@ -43,24 +43,33 @@ namespace Capstone
                     nickles++;
                 }
             }
+            auditLog.Transactions.Add($"{DateTime.Now} GIVE CHANGE: ${Balance} $0.00");
             Console.WriteLine($"Dispensing {quarters} quarters, {dimes} dimes, and {nickles} nickles");
+            Balance = 0;
+            return balance;
         }
 
         public void AddMoney()
         {
-            
             decimal moneyInput = decimal.Parse(Console.ReadLine());
-            if (moneyInput % 1 == 0)
+            if (moneyInput % 1 == 0 && moneyInput > 0)
             {
+                Console.Clear();
                 Balance += moneyInput;
                 Console.WriteLine();
                 Console.WriteLine($"Your current balance is now ${Balance}");
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Invalid amount entered");
                 Console.WriteLine($"Your current balance is {Balance}");
             }
+            Console.WriteLine("ENTER to continue...");
+            Console.ReadLine();
+
+            auditLog.Transactions.Add($"{DateTime.Now} FEED MONEY: ${moneyInput} ${Balance}");
+
         }
 
         public void VendAndSubtract()
@@ -71,19 +80,25 @@ namespace Capstone
 
             foreach (KeyValuePair<string, Item> item in Inventory)
             {
-                if (userDesiredProduct.ToLower() == item.Key.ToLower())
+                if (userDesiredProduct.ToLower() == item.Key.ToLower() && item.Value.Price < Balance)
                 {
                     Console.WriteLine();
-                    Console.WriteLine(item.Value.Message());
 
                     item.Value.Stock--;
+                    auditLog.Transactions.Add($"{DateTime.Now} {item.Value.Name.ToUpper()} {item.Key} ${Balance} ${Balance - item.Value.Price}");
+                    auditLog.PurchaseHistory.Add($"{item.Value.Name} | {5 - item.Value.Stock} \n**TOTAL SALES** ${item.Value.Price}");
                     Balance -= item.Value.Price;
+
+                    Console.Clear();
+                    Console.WriteLine(item.Value.Message());
                     Console.WriteLine($"Your remaining balance is {Balance}");
+                    Console.ReadLine();
                 }
-                else
+                if (item.Value.Price > Balance)
                 {
-                    Console.WriteLine("Please enter valid item ID");
-                    Console.WriteLine();
+                    Console.Clear();
+                    Console.WriteLine($"YOU'RE BROKE, TRY AGAIN!");
+                    Console.ReadLine();
                     break;
                 }
             }

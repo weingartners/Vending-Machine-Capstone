@@ -7,7 +7,7 @@ namespace Capstone
 {
     public class ReadToArray
     {
-        public string FullPath { get; set; } = @"C:\Users\Student\workspace\module1-capstone-c-team-2\Capstone\dotnet\Capstone\bin\Debug\netcoreapp3.1\vendingmachine.txt";
+        public string FullPath { get; set; } = @"C:\Users\LJ\Desktop\Workspace\module1-capstone-c-team-2\Capstone\dotnet\Capstone\vendingmachine.txt";
 
 
         public Dictionary<string, Item> LoadInventory()

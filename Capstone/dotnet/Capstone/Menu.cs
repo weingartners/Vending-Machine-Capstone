@@ -26,9 +26,9 @@ namespace Capstone
 
         }
 
-        public Dictionary<string, Item> MenuOption1(Dictionary<string, Item> dictionary)
+        public void MenuOption1(Dictionary<string, Item> dictionary) // need to return dictionary for tests
         {
-            Console.Clear();
+            Console.Clear();  // need to comment out for tests
 
             foreach (KeyValuePair<string, Item> item in dictionary)
             {
@@ -41,12 +41,14 @@ namespace Capstone
                     Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
                 }
             }
+
+
+          //  return dictionary; need to uncomment for tests
+
             Console.WriteLine();
             Console.WriteLine("ENTER to continue...");
             Console.ReadLine();
             Console.Clear();
-
-            return dictionary;
         }
 
         public void MenuOption2()
@@ -91,7 +93,7 @@ namespace Capstone
 
         public decimal SubMenuOption3(decimal userMoney)
         {
-            Console.Clear();
+            Console.Clear(); // comment out for test
             Console.WriteLine($"Your change is ${userMoney}, have a wonderful day!");
 
             return userMoney;

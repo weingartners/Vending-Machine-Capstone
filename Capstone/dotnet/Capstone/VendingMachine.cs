@@ -49,27 +49,40 @@ namespace Capstone
             return balance;
         }
 
-        public void AddMoney()
+        public void AddMoney() 
         {
-            decimal moneyInput = decimal.Parse(Console.ReadLine());
-            if (moneyInput % 1 == 0 && moneyInput > 0)
+            try
+            {
+                decimal moneyInput = decimal.Parse(Console.ReadLine());
+
+                if (moneyInput > 1000)
+                {
+                    Console.WriteLine("Stop trying to break me, Joe! $1,000 TOPS!");
+                }
+                else if (moneyInput % 1 == 0 && moneyInput > 0)
+                {
+                    Console.Clear();
+                    Balance += moneyInput;
+                    Console.WriteLine();
+                    Console.WriteLine($"Your current balance is now ${Balance}");
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid amount entered");
+                    Console.WriteLine($"Your current balance is {Balance}");
+                }
+                Console.WriteLine("ENTER to continue...");
+                Console.ReadLine();
+
+                auditLog.Transactions.Add($"{DateTime.Now} FEED MONEY: ${moneyInput} ${Balance}");
+            }
+            catch (Exception)
             {
                 Console.Clear();
-                Balance += moneyInput;
-                Console.WriteLine();
-                Console.WriteLine($"Your current balance is now ${Balance}");
+                Console.WriteLine("Please enter a valid dollar amount. \nENTER to continue...");
+                Console.ReadLine();
             }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Invalid amount entered");
-                Console.WriteLine($"Your current balance is {Balance}");
-            }
-            Console.WriteLine("ENTER to continue...");
-            Console.ReadLine();
-
-            auditLog.Transactions.Add($"{DateTime.Now} FEED MONEY: ${moneyInput} ${Balance}");
-
         }
 
         public void VendAndSubtract()

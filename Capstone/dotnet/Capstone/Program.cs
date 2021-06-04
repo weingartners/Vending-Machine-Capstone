@@ -10,13 +10,12 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            double currentBalance = 0;
-
-            VendingMachine vendingMachine = new VendingMachine(currentBalance);
 
             Menu mainMenu = new Menu("1", "2", "3");
 
             string keepMenuOpen = "";
+
+            VendingMachine vendingMachine = new VendingMachine();
 
             while (keepMenuOpen != "3")
             {
@@ -42,15 +41,18 @@ namespace Capstone
 
                         if (userInput == "1")
                         {
-                            mainMenu.SubMenuOption1(currentBalance);
+                            mainMenu.SubMenuOption1(vendingMachine.Balance);
+                            vendingMachine.AddMoney();
                         }
                         else if (userInput == "2")
                         {
-                            mainMenu.SubMenuOption2(vendingMachine.Inventory, currentBalance);
+                            mainMenu.SubMenuOption2(vendingMachine.Inventory);
+                            vendingMachine.VendAndSubtract();
                         }
                         else if (userInput == "3")
                         {
-                            mainMenu.SubMenuOption3(currentBalance);
+                            mainMenu.SubMenuOption3(vendingMachine.Balance);
+                            vendingMachine.DispenseChange(vendingMachine.Balance);
                         }
                         else
                         {

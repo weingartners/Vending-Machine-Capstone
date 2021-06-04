@@ -32,96 +32,61 @@ namespace Capstone
             
             foreach (KeyValuePair<string, Item> item in dictionary)
             {
-                Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
+                if (item.Value.Stock <= 0)
+                {
+                    Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: SOLD OUT");
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
+                }
             }
 
         }
 
         public void MenuOption2()
         {
-            
-            //Console.WriteLine($"Your current balance is ${userMoney}");
 
             Console.WriteLine($"1) Add Money \n2) Select Your Desired Product \n3) Finish Transaction");
 
-            //string userInput = Console.ReadLine();
-
-            //ReadToArray loadInventory = new ReadToArray();
-
-            //Dictionary<string, Item> inventory = loadInventory.LoadInventory();
-
-            //double userMoney = 0;
-
-            //while (userInput != "3")
-            //{
-            //    Console.WriteLine($"1) Add Money \n2) Select Your Desired Product \n3) Finish Transaction");
-            //    userInput = Console.ReadLine();
-
-            //    if (userInput == "1")
-            //    {
-            //        SubMenuOption1(userMoney);
-            //    }
-            //    else if (userInput == "2")
-            //    {
-            //        SubMenuOption2(inventory, userMoney);
-            //    }
-            //    else if (userInput == "3")
-            //    {
-            //        SubMenuOption3(userMoney);
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Please enter a valid entry");
-            //    }
-            //}
         }
-        public void SubMenuOption1(double userMoney)
+        public void MenuOption3()
+        {
+
+            Console.WriteLine("Thank you for shopping with us.");
+        }
+
+        public void SubMenuOption1(decimal userMoney)
         {
 
             Console.WriteLine("Please Enter A Desired Whole Dollar Amount of Money");
 
-            userMoney += double.Parse(Console.ReadLine());
-
-            Console.WriteLine();
-            Console.WriteLine($"Your current balance is now ${userMoney}");
+            
         }
 
-        public void SubMenuOption2(Dictionary<string, Item> dictionary, double userMoney)
+        public void SubMenuOption2(Dictionary<string, Item> dictionary)
         {
             Console.Clear();
 
             foreach (KeyValuePair<string, Item> item in dictionary)
             {
-                Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
-            }
-
-            Console.WriteLine();
-            string userDesiredProduct = Console.ReadLine();
-            Console.WriteLine();
-
-            foreach (KeyValuePair<string, Item> item in dictionary)
-            {
-                if (userDesiredProduct.ToLower() == item.Key.ToLower())
+                if (item.Value.Stock <= 0)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine(item.Value.Message());
-
-                    item.Value.Stock--;
-                    userMoney -= item.Value.Price;
+                    Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: SOLD OUT");
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Value.Identifier} {item.Value.Name} {item.Value.Price} Stock: {item.Value.Stock}");
                 }
             }
+
+            
         }
 
-        public void SubMenuOption3(double userMoney)
+        public void SubMenuOption3(decimal userMoney)
         {
             Console.Clear();
             Console.WriteLine($"Your change is ${userMoney}, have a wonderful day!");
-        }
-
-        public void MenuOption3()
-        {
-           
-            Console.WriteLine("Thank you for shopping with us.");
         }
     }
 }

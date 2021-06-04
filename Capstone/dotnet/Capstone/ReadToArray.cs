@@ -27,22 +27,22 @@ namespace Capstone
 
                         if (lineArray[3].Contains("Gum"))
                         {
-                            Gum gum = new Gum(lineArray[0], lineArray[1], double.Parse(lineArray[2]), lineArray[3], 5);
+                            Gum gum = new Gum(lineArray[0], lineArray[1], decimal.Parse(lineArray[2]), lineArray[3], 5);
                             dictionaryOfItems[lineArray[0]] = gum;
                         }
                         else if (lineArray[3].Contains("Chip"))
                         {
-                            Chip chip = new Chip(lineArray[0], lineArray[1], double.Parse(lineArray[2]), lineArray[3], 5);
+                            Chip chip = new Chip(lineArray[0], lineArray[1], decimal.Parse(lineArray[2]), lineArray[3], 5);
                             dictionaryOfItems[lineArray[0]] = chip;
                         }
                         else if (lineArray[3].Contains("Drink"))
                         {
-                            Drink drink = new Drink(lineArray[0], lineArray[1], double.Parse(lineArray[2]), lineArray[3], 5);
+                            Drink drink = new Drink(lineArray[0], lineArray[1], decimal.Parse(lineArray[2]), lineArray[3], 5);
                             dictionaryOfItems[lineArray[0]] = drink;
                         }
                         else if (lineArray[3].Contains("Candy"))
                         {
-                            Candy candy = new Candy(lineArray[0], lineArray[1], double.Parse(lineArray[2]), lineArray[3], 5);
+                            Candy candy = new Candy(lineArray[0], lineArray[1], decimal.Parse(lineArray[2]), lineArray[3], 5);
                             dictionaryOfItems[lineArray[0]] = candy;
                         }
                     }

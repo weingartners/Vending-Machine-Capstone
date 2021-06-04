@@ -10,13 +10,13 @@ namespace Capstone
 
         public string Name { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public string Type { get; set; }
 
         public int Stock { get; set; } = 5;
 
-        public Item(string identifier, string name, double price, string type, int stock)
+        public Item(string identifier, string name, decimal price, string type, int stock)
         {
             Identifier = identifier;
             Name = name;

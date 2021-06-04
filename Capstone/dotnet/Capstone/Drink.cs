@@ -6,7 +6,7 @@ namespace Capstone
 {
     class Drink : Item
     {
-        public Drink(string identifier, string name, double price, string type, int stock) : base(identifier, name, price, type, stock)
+        public Drink(string identifier, string name, decimal price, string type, int stock) : base(identifier, name, price, type, stock)
         {
 
         }

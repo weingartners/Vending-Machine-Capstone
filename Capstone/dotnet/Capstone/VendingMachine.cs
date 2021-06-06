@@ -93,26 +93,29 @@ namespace Capstone
 
             foreach (KeyValuePair<string, Item> item in Inventory)
             {
-                if (userDesiredProduct.ToLower() == item.Key.ToLower() && item.Value.Price < Balance)
+                if (userDesiredProduct.ToLower() == item.Key.ToLower())
                 {
-                    Console.WriteLine();
+                    if (item.Value.Price <= Balance)
+                    {
+                        Console.WriteLine();
 
-                    item.Value.Stock--;
-                    auditLog.Transactions.Add($"{DateTime.Now} {item.Value.Name.ToUpper()} {item.Key} ${Balance} ${Balance - item.Value.Price}");
-                    auditLog.PurchaseHistory.Add($"{item.Value.Name} | {5 - item.Value.Stock} \n**TOTAL SALES** ${item.Value.Price}");
-                    Balance -= item.Value.Price;
+                        item.Value.Stock--;
+                        auditLog.Transactions.Add($"{DateTime.Now} {item.Value.Name.ToUpper()} {item.Key} ${Balance} ${Balance - item.Value.Price}");
+                        auditLog.PurchaseHistory.Add($"{item.Value.Name} | {5 - item.Value.Stock} \n**TOTAL SALES** ${item.Value.Price}");
+                        Balance -= item.Value.Price;
 
-                    Console.Clear();
-                    Console.WriteLine(item.Value.Message());
-                    Console.WriteLine($"Your remaining balance is {Balance}");
-                    Console.ReadLine();
-                }
-                if (item.Value.Price > Balance)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"YOU'RE BROKE, TRY AGAIN!");
-                    Console.ReadLine();
-                    break;
+                        Console.Clear();
+                        Console.WriteLine(item.Value.Message());
+                        Console.WriteLine($"Your remaining balance is {Balance}");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"YOU'RE BROKE, TRY AGAIN!");
+                        Console.ReadLine();
+                        break;
+                    }
                 }
             }
         }

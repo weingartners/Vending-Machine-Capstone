@@ -38,6 +38,7 @@ namespace Capstone
                     while (userInput != "3")
                     {
                         mainMenu.MenuOption2();
+                        Console.WriteLine($"Your current balance is ${vendingMachine.Balance}");
                         userInput = Console.ReadLine();
 
                         if (userInput == "1")
@@ -48,6 +49,8 @@ namespace Capstone
                         else if (userInput == "2")
                         {
                             mainMenu.SubMenuOption2(vendingMachine.Inventory);
+                            Console.WriteLine();
+                            Console.WriteLine($"Your current balance is ${vendingMachine.Balance}");
                             vendingMachine.VendAndSubtract();
                         }
                         else if (userInput == "3")
